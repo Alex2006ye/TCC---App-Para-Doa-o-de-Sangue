@@ -5,6 +5,93 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".TelaCadastroTipoSanguineo">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="307dp"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="Qual o seu tipo Sanguíneo?"
+        android:textColor="#2E7D32"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.083" />
+
+    <RadioGroup
+        android:id="@+id/grupoTipoSanguineo"
+        android:layout_width="348dp"
+        android:layout_height="382dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <RadioButton
+            android:id="@+id/Apositivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A+" />
+
+        <RadioButton
+            android:id="@+id/Anegativo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A-" />
+
+        <RadioButton
+            android:id="@+id/Bpositivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="B+" />
+
+        <RadioButton
+            android:id="@+id/Bnegativo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="B-" />
+
+        <RadioButton
+            android:id="@+id/ABpositivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AB+" />
+
+        <RadioButton
+            android:id="@+id/ABnegativo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AB-" />
+
+        <RadioButton
+            android:id="@+id/Opositivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="O+" />
+
+        <RadioButton
+            android:id="@+id/Onegativo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="O-" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnAvancarTipoSanguineo"
+        android:layout_width="221dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#558B2F"
+        android:text="Avançar"
+        android:textSize="20sp"
+        app:cornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grupoTipoSanguineo"
+        app:layout_constraintVertical_bias="0.574" />
 </androidx.constraintlayout.widget.ConstraintLayout>

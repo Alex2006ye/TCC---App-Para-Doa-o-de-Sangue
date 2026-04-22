@@ -15,6 +15,8 @@ public class Usuario {
     private String rua;
     private String cep;
     private TipoSanguineo tipoSanguineo;
+    private Integer numero;
+    private String bairro;
 
     public Usuario(Integer id, TipoUsuario tipoUsuario, String nome, String email, String senha, String cpf, String cnpj, Date dataNasc, Double peso, String rua, String cep, Integer numero, String bairro, TipoSanguineo tipoSanguineo) {
         this.id = id;
@@ -32,9 +34,6 @@ public class Usuario {
         this.bairro = bairro;
         this.tipoSanguineo = tipoSanguineo;
     }
-
-    private Integer numero;
-    private String bairro;
     public Usuario(){
 
     }

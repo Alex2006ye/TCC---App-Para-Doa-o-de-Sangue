@@ -8,10 +8,21 @@
     android:background="@drawable/gradient_background"
     tools:context=".TelaCadastroDoadores">
 
+    <EditText
+        android:id="@+id/edtNomeDoadorCadastro2"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="CPF"
+        android:inputType="text"
+        android:textColorHint="#100C0C"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="417dp" />
+
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="199dp"
-        android:layout_height="216dp"
+        android:layout_width="204dp"
+        android:layout_height="179dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.452"
@@ -29,7 +40,7 @@
         android:inputType="text"
         android:textColorHint="#100C0C"
         tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="257dp" />
+        tools:layout_editor_absoluteY="222dp" />
 
     <EditText
         android:id="@+id/edtEmailDoadorCadastro"
@@ -39,8 +50,8 @@
         android:hint="Email"
         android:inputType="text"
         android:textColorHint="#090606"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="324dp" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="287dp" />
 
     <EditText
         android:id="@+id/edtIdadeDoadorCadastro"
@@ -51,7 +62,7 @@
         android:inputType="text"
         android:textColorHint="#0B0808"
         tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="461dp" />
+        tools:layout_editor_absoluteY="482dp" />
 
     <EditText
         android:id="@+id/edtSenhaDoadorCadastro"
@@ -62,7 +73,7 @@
         android:inputType="text"
         android:textColorHint="#141010"
         tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="390dp" />
+        tools:layout_editor_absoluteY="352dp" />
 
     <EditText
         android:id="@+id/editTextText5"
@@ -72,8 +83,8 @@
         android:hint="Peso"
         android:inputType="text"
         android:textColorHint="#090505"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="535dp" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="543dp" />
 
     <Button
         android:id="@+id/btnAvancarCadastroDoador"
@@ -84,6 +95,6 @@
         android:textSize="20sp"
         app:cornerRadius="5dp"
         tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="621dp" />
+        tools:layout_editor_absoluteY="634dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
