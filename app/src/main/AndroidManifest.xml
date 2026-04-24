@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Redesocial_bancodesangue">
         <activity
+            android:name=".TelaInicial"
+            android:exported="false" />
+        <activity
             android:name=".TelaCadastroTipoSanguineo"
             android:exported="false" />
         <activity
