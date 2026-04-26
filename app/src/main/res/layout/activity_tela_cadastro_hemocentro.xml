@@ -9,37 +9,48 @@
     tools:context=".TelaCadastroHemocentro">
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/edtCnpjHemocentro"
         android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="CNPJ"
         android:inputType="text"
         android:textColorHint="#0D0909"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="462dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.718" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/edtEmailHemocentro"
         android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Email"
         android:inputType="text"
         android:textColorHint="#0D0909"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.613" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/edtSenhaHemocentro"
         android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Senha"
         android:inputType="text"
         android:textColorHint="#0D0909"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="319dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -54,24 +65,31 @@
         app:srcCompat="@drawable/blood_donation_3347773" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAvancarCadastroHemocentro"
         android:layout_width="265dp"
         android:layout_height="73dp"
         android:backgroundTint="#558B2F"
         android:text="Avançar"
         android:textSize="24sp"
         app:cornerRadius="5dp"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="591dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.887" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/edtNomeHemocentro"
         android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Nome"
         android:inputType="text"
         android:textColorHint="#0D0909"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="251dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.396" />
 </androidx.constraintlayout.widget.ConstraintLayout>
