@@ -1,6 +1,6 @@
 package com.example.redesocial_bancodesangue.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Usuario {
     private Integer id;
@@ -10,7 +10,7 @@ public class Usuario {
     private String senha;
     private String cpf;
     private String cnpj;
-    private Date dataNasc;
+    private String dataNasc;
     private Double peso;
     private String rua;
     private String cep;
@@ -18,7 +18,7 @@ public class Usuario {
     private Integer numero;
     private String bairro;
 
-    public Usuario(Integer id, TipoUsuario tipoUsuario, String nome, String email, String senha, String cpf, String cnpj, Date dataNasc, Double peso, String rua, String cep, Integer numero, String bairro, TipoSanguineo tipoSanguineo) {
+    public Usuario(Integer id, TipoUsuario tipoUsuario, String nome, String email, String senha, String cpf, String cnpj, String dataNasc, Double peso, String rua, String cep, Integer numero, String bairro, TipoSanguineo tipoSanguineo) {
         this.id = id;
         this.tipoUsuario = tipoUsuario;
         this.nome = nome;
@@ -86,11 +86,11 @@ public class Usuario {
         this.cnpj = cnpj;
     }
 
-    public Date getDataNasc() {
+    public String getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
 
