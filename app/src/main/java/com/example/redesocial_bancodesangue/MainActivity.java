@@ -19,6 +19,8 @@ import com.example.redesocial_bancodesangue.model.Usuario;
 import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
 import com.example.redesocial_bancodesangue.retrofit.UsuarioApi;
 
+import java.util.Optional;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,24 +78,23 @@ public class MainActivity extends AppCompatActivity {
                 api.consultar(dto).enqueue(new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        if (response.isSuccessful()) {
+                        if (response.isSuccessful() && response.body() != null) {
                             Usuario usuario = new Usuario();
                             usuario.setId(response.body().getId());
 
-                            Toast.makeText(getApplicationContext(), "Login realizado com sucesso" + response.code(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), TelaInicial.class);
                             intent.putExtra("idUsuario", usuario.getId());
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Login fracassou" + response.code(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Login fracassou", Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable throwable) {
-                        Toast.makeText(getApplicationContext(), "Login Deu Erro" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Login Deu Erro", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
