@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.redesocial_bancodesangue.dto.LoginDTO;
+import com.example.redesocial_bancodesangue.model.TipoUsuario;
 import com.example.redesocial_bancodesangue.model.Usuario;
 import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
 import com.example.redesocial_bancodesangue.retrofit.UsuarioApi;
@@ -81,12 +82,21 @@ public class MainActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             Usuario usuario = new Usuario();
                             usuario.setId(response.body().getId());
+                            usuario.setTipoUsuario(response.body().getTipoUsuario());
 
                             Toast.makeText(getApplicationContext(), "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), TelaInicial.class);
-                            intent.putExtra("idUsuario", usuario.getId());
-                            startActivity(intent);
-                            finish();
+                            if(usuario.getTipoUsuario().equals(TipoUsuario.UsuarioDoador)){
+                                Intent intent = new Intent(getApplicationContext(), TelaInicial.class);
+                                intent.putExtra("idUsuario", usuario.getId());
+                                startActivity(intent);
+                                finish();
+                            }
+                            else {
+                                Intent intent = new Intent(getApplicationContext(), TelaInicialHemocentros.class);
+                                intent.putExtra("idUsuario", usuario.getId());
+                                startActivity(intent);
+                                finish();
+                            }
                         } else {
                             Toast.makeText(getApplicationContext(), "Login fracassou", Toast.LENGTH_SHORT).show();
                         }
