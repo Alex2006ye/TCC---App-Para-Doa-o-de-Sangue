@@ -74,4 +74,20 @@
         app:layout_constraintTop_toBottomOf="@+id/grupoTipoUsuario"
         app:layout_constraintVertical_bias="0.266" />
 
+    <TextView
+        android:id="@+id/txtLinkLogin"
+        android:layout_width="278dp"
+        android:layout_height="37dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="Já tem conta? Faça o Login então"
+        android:textColor="#1565C0"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.912" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

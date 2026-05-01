@@ -2,7 +2,7 @@ package com.example.redesocial_bancodesangue.model;
 
 public enum TipoSanguineo {
     APositivo("A+"),
-    ANegtivo("A-"),
+    ANegativo("A-"),
     BPositivo("B+"),
     BNegativo("B-"),
     ABPositivo("AB+"),
