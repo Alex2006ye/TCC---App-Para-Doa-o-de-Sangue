@@ -24,7 +24,6 @@ public class TelaInicialHemocentros extends AppCompatActivity {
         biding = ActivityTelaInicialHemocentrosBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(biding.getRoot());
-        fragmentReplace(new HomeHemocentroFragment());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -32,21 +31,18 @@ public class TelaInicialHemocentros extends AppCompatActivity {
         });
 
         int idHemocentro = getIntent().getIntExtra("idUsuario", -1);
-        Bundle bundle = new Bundle();
-        bundle.putInt("idUsuario", idHemocentro);
 
-        HomeHemocentroFragment fragment = new HomeHemocentroFragment();
-        fragment.setArguments(bundle);
+        fragmentReplace(HomeHemocentroFragment.newInstance(idHemocentro));
 
         // Aqui ele vai verificar para qual fragment ele deve mudar
         biding.bottomNavigationView.setOnItemSelectedListener(menuItem -> {
             int menuItemId = menuItem.getItemId();
 
             if(menuItemId == R.id.homeHemo){
-                fragmentReplace(new HomeHemocentroFragment());
+                fragmentReplace(HomeHemocentroFragment.newInstance(idHemocentro));
             }
-            if (menuItemId == R.id.campanhasHemo){
-                fragmentReplace(new CampanhasHemocentroFragment());
+            else if (menuItemId == R.id.campanhasHemo){
+                fragmentReplace(CampanhasHemocentroFragment.newInstance(idHemocentro));
             }
 
             return true;

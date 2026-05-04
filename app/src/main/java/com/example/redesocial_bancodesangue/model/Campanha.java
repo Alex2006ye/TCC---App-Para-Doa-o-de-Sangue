@@ -19,6 +19,10 @@ public class Campanha {
         this.tipoSanguineoVisado = tipoSanguineoVisado;
     }
 
+    public Campanha(){
+
+    }
+
     public Integer getIdCampanha() {
         return idCampanha;
     }

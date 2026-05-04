@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.redesocial_bancodesangue.adapter.RecyclerViewInterface;
+import com.example.redesocial_bancodesangue.model.Campanha;
 import com.example.redesocial_bancodesangue.retrofit.CampanhaApi;
 import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
 
@@ -45,16 +47,15 @@ public class HomeHemocentroFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param
+     * @param
      * @return A new instance of fragment HomeHemocentroFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeHemocentroFragment newInstance(String param1, String param2) {
+    public static HomeHemocentroFragment newInstance(int idHemocentro) {
         HomeHemocentroFragment fragment = new HomeHemocentroFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt("idHemocentro", idHemocentro);
         fragment.setArguments(args);
         return fragment;
     }
