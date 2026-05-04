@@ -6,19 +6,17 @@ public class Campanha {
     private Integer idCampanha;
     private Integer idUsuarioHemocentro;
     private String nomeCampanha;
-    private Date dataInicio;
-    private Date dataFim;
+    private String dataInicio;
+    private String dataFim;
     private TipoSanguineo tipoSanguineoVisado;
-    private Boolean status;
 
-    public Campanha(Integer idCampanha, Integer idUsuarioHemocentro, String nomeCampanha, Date dataInicio, Date dataFim, TipoSanguineo tipoSanguineoVisado, Boolean status) {
+    public Campanha(Integer idCampanha, Integer idUsuarioHemocentro, String nomeCampanha, String dataInicio, String dataFim, TipoSanguineo tipoSanguineoVisado) {
         this.idCampanha = idCampanha;
         this.idUsuarioHemocentro = idUsuarioHemocentro;
         this.nomeCampanha = nomeCampanha;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.tipoSanguineoVisado = tipoSanguineoVisado;
-        this.status = status;
     }
 
     public Integer getIdCampanha() {
@@ -45,19 +43,19 @@ public class Campanha {
         this.nomeCampanha = nomeCampanha;
     }
 
-    public Date getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFim() {
+    public String getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
 
@@ -67,13 +65,5 @@ public class Campanha {
 
     public void setTipoSanguineoVisado(TipoSanguineo tipoSanguineoVisado) {
         this.tipoSanguineoVisado = tipoSanguineoVisado;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 }
