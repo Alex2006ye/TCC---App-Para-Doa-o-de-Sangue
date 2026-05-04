@@ -1,25 +1,21 @@
-package com.example.redesocial_bancodesangue.model;
+package com.example.redesocial_bancodesangue.dto;
 
-import java.util.Date;
+import com.example.redesocial_bancodesangue.model.TipoSanguineo;
 
-public class Campanha {
+public class CampanhaUpdateDTO {
     private Integer idCampanha;
-    private Integer idUsuarioHemocentro;
-    private String nomeCampanha;
-    private String dataInicio;
-    private String dataFim;
+    private String nomeCampanha, dataInicio, dataFim;
     private TipoSanguineo tipoSanguineoVisado;
 
-    public Campanha(Integer idCampanha, Integer idUsuarioHemocentro, String nomeCampanha, String dataInicio, String dataFim, TipoSanguineo tipoSanguineoVisado) {
+    public CampanhaUpdateDTO(Integer idCampanha, String nomeCampanha, String dataInicio, String dataFim, TipoSanguineo tipoSanguineoVisado) {
         this.idCampanha = idCampanha;
-        this.idUsuarioHemocentro = idUsuarioHemocentro;
         this.nomeCampanha = nomeCampanha;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.tipoSanguineoVisado = tipoSanguineoVisado;
     }
 
-    public Campanha(){
+    public CampanhaUpdateDTO() {
 
     }
 
@@ -29,14 +25,6 @@ public class Campanha {
 
     public void setIdCampanha(Integer idCampanha) {
         this.idCampanha = idCampanha;
-    }
-
-    public Integer getIdUsuarioHemocentro() {
-        return idUsuarioHemocentro;
-    }
-
-    public void setIdUsuarioHemocentro(Integer idUsuarioHemocentro) {
-        this.idUsuarioHemocentro = idUsuarioHemocentro;
     }
 
     public String getNomeCampanha() {

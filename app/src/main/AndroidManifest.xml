@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Redesocial_bancodesangue"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".TelaTipoSanguineoAlterar"
+            android:exported="false" />
+        <activity
+            android:name=".TelaAlterarCampanha"
+            android:exported="false" />
+        <activity
+            android:name=".TelaCriarCampanhaTipoSanguineo"
+            android:exported="false" />
+        <activity
+            android:name=".TelaCriarCampanha"
+            android:exported="false" />
+        <activity
             android:name=".TelaInicialHemocentros"
             android:exported="false" />
         <activity

@@ -6,11 +6,11 @@ import java.time.LocalDate;
 
 public class CampanhaCreateDTO {
     private String nomeCampanha;
-    private LocalDate dataInicio, dataFim;
+    private String dataInicio, dataFim;
     private TipoSanguineo tipoSanguineo;
     private Integer idUsuarioHemocentro;
 
-    public CampanhaCreateDTO(String nomeCampanha, LocalDate dataInicio, LocalDate dataFim, TipoSanguineo tipoSanguineo, Integer idUsuarioHemocentro) {
+    public CampanhaCreateDTO(String nomeCampanha, String dataInicio, String dataFim, TipoSanguineo tipoSanguineo, Integer idUsuarioHemocentro) {
         this.nomeCampanha = nomeCampanha;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -30,19 +30,19 @@ public class CampanhaCreateDTO {
         this.nomeCampanha = nomeCampanha;
     }
 
-    public LocalDate getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDate getDataFim() {
+    public String getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(LocalDate dataFim) {
+    public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
 
