@@ -132,7 +132,6 @@ public class CampanhasHemocentroFragment extends Fragment implements RecyclerVie
                     lista.clear();
                     lista.addAll(response.body());
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(getActivity(), "lista carregada com sucesso", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(getActivity(), "A lista não pode ser carregada", Toast.LENGTH_SHORT).show();
                     try {

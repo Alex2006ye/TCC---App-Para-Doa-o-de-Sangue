@@ -64,6 +64,11 @@ public class TelaCadastroHemocentro extends AppCompatActivity {
                     return;
                 }
 
+                if(cnpj.length() > 14 || cnpj.length() < 14){
+                    Toast.makeText(getApplicationContext(), "O CNPJ foi digitado de forma incorreta", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Usuario usuario = new Usuario();
                 usuario.setEmail(email);
                 usuario.setSenha(senha);
@@ -73,22 +78,22 @@ public class TelaCadastroHemocentro extends AppCompatActivity {
 
                 UsuarioHemocentroCreateDTO usuarioHemocentroCreateDTO = new UsuarioHemocentroCreateDTO(usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getCnpj(), usuario.getTipoUsuario());
 
-                api.salvarUsuarioHemocentro(usuarioHemocentroCreateDTO).enqueue(new Callback<Usuario>() {
+                api.salvarUsuarioHemocentro(usuarioHemocentroCreateDTO).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.code() == 409){
+                            Toast.makeText(getApplicationContext(), "Email ou CNPJ já cadastrado", Toast.LENGTH_SHORT).show();
+                        }
                         if(response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
                         }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Erro! Verifique Email ou Senha", Toast.LENGTH_SHORT).show();
-                        }
                     }
 
                     @Override
-                    public void onFailure(Call<Usuario> call, Throwable throwable) {
+                    public void onFailure(Call<Void> call, Throwable throwable) {
                         Toast.makeText(getApplicationContext(), "Cadastro deu erro", Toast.LENGTH_SHORT).show();
                     }
                 });

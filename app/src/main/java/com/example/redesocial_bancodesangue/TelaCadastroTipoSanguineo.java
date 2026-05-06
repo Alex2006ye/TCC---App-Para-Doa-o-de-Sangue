@@ -112,24 +112,27 @@ public class TelaCadastroTipoSanguineo extends AppCompatActivity {
 
                 UsuarioDoadorCreateDTO usuarioDoadorCreateDTO = new UsuarioDoadorCreateDTO(usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getCpf(), usuario.getPeso(), usuario.getDataNasc(), usuario.getTipoUsuario(), usuario.getTipoSanguineo());
 
-                api.salvarUsuarioDoador(usuarioDoadorCreateDTO).enqueue(new Callback<Usuario>() {
+                api.salvarUsuarioDoador(usuarioDoadorCreateDTO).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.code() == 409){
+                            Toast.makeText(getApplicationContext(), "Email ou CPF já cadastrado", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), TelaCadastroDoadores.class);
+                            startActivity(intent);
+                            finish();
+                        }
                         if(response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
                         }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Erro! Verifique Email ou Senha", Toast.LENGTH_SHORT).show();
-                        }
                     }
 
                     @Override
-                    public void onFailure(Call<Usuario> call, Throwable throwable) {
+                    public void onFailure(Call<Void> call, Throwable throwable) {
                         throwable.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Cadastro deu erro " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Cadastro deu erro, não conseguiu se comunicar com servidor", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

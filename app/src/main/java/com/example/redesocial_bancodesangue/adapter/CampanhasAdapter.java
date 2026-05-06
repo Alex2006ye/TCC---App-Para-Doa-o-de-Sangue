@@ -70,7 +70,7 @@ public class CampanhasAdapter extends RecyclerView.Adapter<CampanhasAdapter.View
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if(LocalDate.parse(campanha.getDataFim()).isBefore(hoje)){ //Ou seja, se a data fim já foi, quer dizer que está inativa
+            if(LocalDate.parse(campanha.getDataFim()).isBefore(hoje) || LocalDate.parse(campanha.getDataInicio()).isAfter(hoje)){ //Ou seja, se a data fim já foi, quer dizer que está inativa
                 holder.txtStatus.setText("Inativa");
             } else {
                 holder.txtStatus.setText("Ativa");

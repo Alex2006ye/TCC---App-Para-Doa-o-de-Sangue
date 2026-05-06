@@ -98,6 +98,12 @@ public class TelaCadastroDoadores extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Digite todos os campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if(cpf.length() < 11 || cpf.length() > 11){
+                    Toast.makeText(getApplicationContext(), "O CPF foi digitado incorretamente", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 //basicamente, ele verifica se a pessoa está apta para fazer a doação de sangue, verificando o peso e a idade
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
