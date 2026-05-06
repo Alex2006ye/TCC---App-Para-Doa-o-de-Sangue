@@ -16,8 +16,8 @@ public interface UsuarioApi {
     Call<Usuario> consultar(@Body LoginDTO dto);
 
     @POST("users/salvarUsuarioDoador")
-    Call<Usuario> salvarUsuarioDoador(@Body UsuarioDoadorCreateDTO dto);
+    Call<Void> salvarUsuarioDoador(@Body UsuarioDoadorCreateDTO dto);
 
     @POST("users/salvarUsuarioHemocentro")
-    Call<Usuario> salvarUsuarioHemocentro(@Body UsuarioHemocentroCreateDTO dto);
+    Call<Void> salvarUsuarioHemocentro(@Body UsuarioHemocentroCreateDTO dto);
 }
