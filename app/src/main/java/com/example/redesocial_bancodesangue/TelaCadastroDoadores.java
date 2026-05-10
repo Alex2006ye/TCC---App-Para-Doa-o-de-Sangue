@@ -19,7 +19,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.redesocial_bancodesangue.model.TipoUsuario;
 import com.example.redesocial_bancodesangue.model.Usuario;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -94,12 +93,12 @@ public class TelaCadastroDoadores extends AppCompatActivity {
                 Usuario usuario = new Usuario();
 
                 // verifica se os campos estão preenchidos ou não
-                if(nome.isEmpty() || email.isEmpty() || senha.isEmpty() || idade.isEmpty() || cpf.isEmpty() || peso.isEmpty()){
+                if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || idade.isEmpty() || cpf.isEmpty() || peso.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Digite todos os campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(cpf.length() < 11 || cpf.length() > 11){
+                if (cpf.length() < 11 || cpf.length() > 11) {
                     Toast.makeText(getApplicationContext(), "O CPF foi digitado incorretamente", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -137,6 +136,6 @@ public class TelaCadastroDoadores extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-            });
-        }
+        });
     }
+}
