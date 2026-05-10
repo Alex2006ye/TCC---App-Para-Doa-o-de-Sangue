@@ -1,14 +1,14 @@
 package com.example.redesocial_bancodesangue.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Agendamento {
     private Integer idAgendamento;
     private Integer idUsuarioDoador;
     private Integer idUsuarioHemocentro;
-    private Date dataHora;
+    private LocalDateTime dataHora;
 
-    public Agendamento(Integer idAgendamento, Integer idUsuarioDoador, Integer idUsuarioHemocentro, Date dataHora) {
+    public Agendamento(Integer idAgendamento, Integer idUsuarioDoador, Integer idUsuarioHemocentro, LocalDateTime dataHora) {
         this.idAgendamento = idAgendamento;
         this.idUsuarioDoador = idUsuarioDoador;
         this.idUsuarioHemocentro = idUsuarioHemocentro;
@@ -43,11 +43,11 @@ public class Agendamento {
         this.idUsuarioHemocentro = idUsuarioHemocentro;
     }
 
-    public Date getDataHora() {
+    public LocalDateTime getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(Date dataHora) {
+    public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
     }
 }
