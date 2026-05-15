@@ -9,7 +9,9 @@ import java.util.Optional;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface UsuarioApi {
     @POST("users/login")
@@ -20,4 +22,7 @@ public interface UsuarioApi {
 
     @POST("users/salvarUsuarioHemocentro")
     Call<Void> salvarUsuarioHemocentro(@Body UsuarioHemocentroCreateDTO dto);
+
+    @GET("users/buscarUsuarioPorId/{id}")
+    Call<Usuario> buscarUsuarioPorId(@Path("id") Integer id);
 }
