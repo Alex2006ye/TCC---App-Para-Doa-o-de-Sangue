@@ -11,7 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.redesocial_bancodesangue.adapter.RecyclerViewInterface;
+import com.example.redesocial_bancodesangue.model.Agendamento;
 import com.example.redesocial_bancodesangue.model.Campanha;
+import com.example.redesocial_bancodesangue.retrofit.AgendamentoApi;
 import com.example.redesocial_bancodesangue.retrofit.CampanhaApi;
 import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
 
@@ -35,9 +37,10 @@ public class HomeHemocentroFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private TextView txtNumeroCampanhasAtivas, txtNumeroCampanhasFinalizadas;
+    private TextView txtNumeroCampanhasAtivas, txtNumeroCampanhasFinalizadas, txtNumeroAgendamentosAtivos;
     private RetrofitService retrofit;
     private CampanhaApi api;
+    private AgendamentoApi apizinha;
 
     public HomeHemocentroFragment() {
         // Required empty public constructor
@@ -81,9 +84,11 @@ public class HomeHemocentroFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_hemocentro, container, false);
         txtNumeroCampanhasAtivas = view.findViewById(R.id.numeroCard);
         txtNumeroCampanhasFinalizadas = view.findViewById(R.id.numeroSegundoCard);
+        txtNumeroAgendamentosAtivos = view.findViewById(R.id.numeroTerceiroCard);
 
         analisarCampanhasAtivas(idHemocentro);
         analisarCampanhasFinalizadas(idHemocentro);
+        contarAgendamentosAtivos(idHemocentro);
 
         return view;
     }
@@ -123,6 +128,25 @@ public class HomeHemocentroFragment extends Fragment {
             @Override
             public void onFailure(Call<Integer> call, Throwable throwable) {
                 Toast.makeText(getContext(), "Erro em trazer o dado atual de campanhas finalizadas", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void contarAgendamentosAtivos(Integer idHemocentro){
+        retrofit = new RetrofitService();
+        apizinha = retrofit.getRetrofit().create(AgendamentoApi.class);
+
+        apizinha.contarAgendamentosAtivosHemo(idHemocentro).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    txtNumeroAgendamentosAtivos.setText(response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable throwable) {
+                Toast.makeText(getContext(), "Erro em trazer o dado atual de agendamentos ativos", Toast.LENGTH_SHORT).show();
             }
         });
     }
