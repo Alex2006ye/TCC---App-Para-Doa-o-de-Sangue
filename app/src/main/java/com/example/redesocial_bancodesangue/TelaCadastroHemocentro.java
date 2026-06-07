@@ -3,6 +3,7 @@ package com.example.redesocial_bancodesangue;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,6 +95,12 @@ public class TelaCadastroHemocentro extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable throwable) {
+                        Log.e("RETROFIT_ERROR", "Mensagem: " + throwable.getMessage());
+                        Log.e("RETROFIT_ERROR", "Causa: " + throwable.getCause());
+                        throwable.printStackTrace();
+
+                        Toast.makeText(getApplicationContext(),
+                                "Erro: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
                         Toast.makeText(getApplicationContext(), "Cadastro deu erro", Toast.LENGTH_SHORT).show();
                     }
                 });
