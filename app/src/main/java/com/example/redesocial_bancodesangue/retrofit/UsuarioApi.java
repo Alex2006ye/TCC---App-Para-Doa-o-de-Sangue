@@ -5,6 +5,7 @@ import com.example.redesocial_bancodesangue.dto.UsuarioDoadorCreateDTO;
 import com.example.redesocial_bancodesangue.dto.UsuarioHemocentroCreateDTO;
 import com.example.redesocial_bancodesangue.model.Usuario;
 
+import java.util.List;
 import java.util.Optional;
 
 import retrofit2.Call;
@@ -25,4 +26,7 @@ public interface UsuarioApi {
 
     @GET("users/buscarUsuarioPorId/{id}")
     Call<Usuario> buscarUsuarioPorId(@Path("id") Integer id);
+
+    @GET("users/hemocentros")
+    Call<List<Usuario>> listarHemocentros();
 }

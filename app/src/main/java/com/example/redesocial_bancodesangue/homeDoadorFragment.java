@@ -8,14 +8,29 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.location.Address;
+import android.location.Geocoder;
+import android.util.Log;
 
+import com.example.redesocial_bancodesangue.model.Usuario;
+import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
+import com.example.redesocial_bancodesangue.retrofit.UsuarioApi;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link homeDoadorFragment#newInstance} factory method to
@@ -85,19 +100,64 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         myMap = googleMap;
 
-        LatLng guarulhos = new LatLng(-23.4543, -46.5333);
+        carregarHemocentros();
+    }
 
-        myMap.addMarker(
-                new MarkerOptions()
-                        .position(guarulhos)
-                        .title("Guarulhos")
-        );
+    private void carregarHemocentros() {
+        RetrofitService retrofitService = new RetrofitService();
 
-        myMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(
-                        guarulhos,
-                        13f
-                )
-        );
+        UsuarioApi api = retrofitService.getRetrofit().create(UsuarioApi.class);
+
+        api.listarHemocentros().enqueue(new Callback<List<Usuario>>() {
+
+                    @Override
+                    public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
+
+                        if(response.isSuccessful() && response.body() != null){
+
+                            for(Usuario hemo : response.body()){
+                                localizarHemocentro(hemo);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Usuario>> call, Throwable t) {
+
+                        Log.e(
+                                "MAPA",
+                                "Erro ao buscar hemocentros",
+                                t
+                        );
+                    }
+                });
+    }
+
+    private void localizarHemocentro(Usuario hemo) {
+
+        try {
+            Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
+
+            String enderecoCompleto = hemo.getRua() + ", "
+                            + hemo.getNumero() + ", "
+                            + hemo.getBairro() + ", "
+                            + hemo.getCep();
+
+            List<Address> resultado = geocoder.getFromLocationName(enderecoCompleto, 1);
+
+            if(resultado != null && !resultado.isEmpty()) {
+
+                Address endereco = resultado.get(0);
+
+                LatLng posicao = new LatLng(endereco.getLatitude(), endereco.getLongitude());
+
+                myMap.addMarker(new MarkerOptions().position(posicao).title(hemo.getNome()));
+
+                myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posicao, 12f));
+            }
+
+        } catch (IOException e) {
+            Log.e("MAPA", "Erro ao converter endereço", e);
+        }
     }
 }
