@@ -20,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -150,14 +151,28 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
                 Address endereco = resultado.get(0);
 
                 LatLng posicao = new LatLng(endereco.getLatitude(), endereco.getLongitude());
-
-                myMap.addMarker(new MarkerOptions().position(posicao).title(hemo.getNome()));
+                //Adiciona marcador no mapa
+                Marker marker = myMap.addMarker(new MarkerOptions().position(posicao).title(hemo.getNome()));
+                //Guarda ID dentro do marcador
+                marker.setTag(hemo.getId());
 
                 myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posicao, 12f));
             }
+            myMap.setOnMarkerClickListener(marker -> {
+                Integer idHemocentro = (Integer) marker.getTag();
+                abrirCampanhas(idHemocentro);
+                return true;
+            });
 
         } catch (IOException e) {
             Log.e("MAPA", "Erro ao converter endereço", e);
         }
+    }
+
+    private void abrirCampanhas(Integer idHemocentro){
+
+        CampanhasHemocentroFragment fragment = CampanhasHemocentroFragment.newInstance(idHemocentro);
+
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameTelaInicial, fragment).addToBackStack(null).commit();
     }
 }
