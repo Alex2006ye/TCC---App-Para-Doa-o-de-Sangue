@@ -3,15 +3,20 @@ package com.example.redesocial_bancodesangue.dto;
 import com.example.redesocial_bancodesangue.model.TipoUsuario;
 
 public class UsuarioHemocentroCreateDTO {
-    private String nome, email, senha, cnpj;
+    private String nome, email, senha, cnpj, rua, bairro, cep;
+    private Integer numero;
     private TipoUsuario tipoUsuario;
 
-    public UsuarioHemocentroCreateDTO(String nome, String email, String senha, String cnpj, TipoUsuario tipoUsuario) {
+    public UsuarioHemocentroCreateDTO(String nome, String email, String senha, String cnpj, TipoUsuario tipoUsuario, String rua, String bairro, Integer numero, String cep) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.cnpj = cnpj;
         this.tipoUsuario = tipoUsuario;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.numero = numero;
+        this.cep = cep;
     }
 
     public UsuarioHemocentroCreateDTO(){
@@ -57,4 +62,31 @@ public class UsuarioHemocentroCreateDTO {
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getCep(){return cep;}
+    public void setCep(String cep){this.cep = cep;}
 }
