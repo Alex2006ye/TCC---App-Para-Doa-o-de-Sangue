@@ -22,6 +22,7 @@ public class CampanhasAdapter extends RecyclerView.Adapter<CampanhasAdapter.View
     private List<Campanha> lista;
     private static RecyclerViewInterface listener;
 
+
     public CampanhasAdapter(List<Campanha> lista, RecyclerViewInterface listener) {
         this.lista = lista;
         this.listener = listener;

@@ -88,7 +88,7 @@ public class HomeHemocentroFragment extends Fragment {
 
         analisarCampanhasAtivas(idHemocentro);
         analisarCampanhasFinalizadas(idHemocentro);
-        contarAgendamentosAtivos(idHemocentro);
+        contarParticipantesCampanhas(idHemocentro);
 
         return view;
     }
@@ -132,22 +132,24 @@ public class HomeHemocentroFragment extends Fragment {
         });
     }
 
-    private void contarAgendamentosAtivos(Integer idHemocentro){
+    private void contarParticipantesCampanhas(Integer idHemocentro){
+
         retrofit = new RetrofitService();
+
         apizinha = retrofit.getRetrofit().create(AgendamentoApi.class);
 
-        apizinha.contarAgendamentosAtivosHemo(idHemocentro).enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if (response.isSuccessful() && response.body() != null){
-                    txtNumeroAgendamentosAtivos.setText(response.body().toString());
-                }
-            }
+        apizinha.contarParticipantesCampanhas(idHemocentro).enqueue(new Callback<Integer>() {
+                    @Override
+                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                        if(response.isSuccessful() && response.body() != null){
+                            txtNumeroAgendamentosAtivos.setText(response.body().toString());
+                        }
+                    }
 
-            @Override
-            public void onFailure(Call<Integer> call, Throwable throwable) {
-                Toast.makeText(getContext(), "Erro em trazer o dado atual de agendamentos ativos", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onFailure(Call<Integer> call, Throwable throwable) {
+                        Toast.makeText(getContext(), "Erro ao contar participantes", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

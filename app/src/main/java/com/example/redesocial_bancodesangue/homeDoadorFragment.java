@@ -22,9 +22,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,6 +45,7 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Integer idDoador;
 
     public homeDoadorFragment() {
         // Required empty public constructor
@@ -72,6 +70,7 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            idDoador = getArguments().getInt("idDoador");
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -170,8 +169,7 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void abrirCampanhas(Integer idHemocentro){
-
-        CampanhasHemocentroFragment fragment = CampanhasHemocentroFragment.newInstance(idHemocentro);
+        ListaCampanhasHemocentroDoadorFragment fragment = ListaCampanhasHemocentroDoadorFragment.newInstance(idHemocentro, idDoador);
 
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameTelaInicial, fragment).addToBackStack(null).commit();
     }
