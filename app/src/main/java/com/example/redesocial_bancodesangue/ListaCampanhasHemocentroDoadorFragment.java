@@ -28,6 +28,7 @@ import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -128,6 +129,16 @@ public class ListaCampanhasHemocentroDoadorFragment extends Fragment implements 
 
         Campanha campanha = campanhas.get(position);
 
+        LocalDate hoje = LocalDate.now();
+
+        LocalDate inicio = LocalDate.parse(campanha.getDataInicio());
+        LocalDate fim = LocalDate.parse(campanha.getDataFim());
+
+        if(hoje.isBefore(inicio) || hoje.isAfter(fim)){
+            Toast.makeText(getContext(), "Esta campanha não está ativa.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 
         builder.setTitle(campanha.getNomeCampanha());
@@ -176,15 +187,23 @@ public class ListaCampanhasHemocentroDoadorFragment extends Fragment implements 
     private void abrirSeletorData(Campanha campanha){
 
         LocalDate hoje = LocalDate.now();
+        LocalDate inicio = LocalDate.parse(campanha.getDataInicio());
+        LocalDate fim = LocalDate.parse(campanha.getDataFim());
 
         DatePickerDialog datePicker = new DatePickerDialog(requireContext(),
                 (view, year, month, dayOfMonth) -> {
                 LocalDate dataSelecionada = LocalDate.of(year, month + 1, dayOfMonth);
+                    if(dataSelecionada.isBefore(inicio) || dataSelecionada.isAfter(fim)){
+                        Toast.makeText(getContext(), "Escolha uma data entre " + inicio + " e " + fim, Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     abrirSeletorHora(campanha, dataSelecionada);
                 },
                 hoje.getYear(), hoje.getMonthValue() - 1, hoje.getDayOfMonth()
         );
+        datePicker.getDatePicker().setMinDate(inicio.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli());
 
+        datePicker.getDatePicker().setMaxDate(fim.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli());
         datePicker.show();
     }
 
