@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -38,9 +39,11 @@ public class AgendamentoAdapter extends RecyclerView.Adapter<AgendamentoAdapter.
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             this.itemView = itemView;
 
-            txtNome = itemView.findViewById(R.id.txtNomeCampanhaRecycler);
+            txtNome = itemView.findViewById(R.id.txtNomeHemocentroAgendadoRecycler);
+
             txtDiaHora = itemView.findViewById(R.id.txtDiaHoraRecycler);
         }
     }
@@ -54,26 +57,24 @@ public class AgendamentoAdapter extends RecyclerView.Adapter<AgendamentoAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         Agendamento agendamento = lista.get(position);
 
-        holder.txtDiaHora.setText(agendamento.getDataHora().toString());
+        if(agendamento.getCampanha() != null){
+            holder.txtNome.setText(
+                    agendamento.getCampanha().getNomeCampanha()
+            );
+        }else{
+            holder.txtNome.setText("Campanha não encontrada");
+        }
 
-        RetrofitService retrofitService = new RetrofitService();
-        UsuarioApi api = retrofitService.getRetrofit().create(UsuarioApi.class);
-
-        api.buscarUsuarioPorId(agendamento.getIdUsuarioHemocentro()).enqueue(new Callback<Usuario>() {
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                holder.txtNome.setText(response.body().getNome());
-            }
-
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable throwable) {
-                holder.txtNome.setText("Nome indisponível");
-            }
-        });
-
-        CardView card = holder.itemView.findViewById(R.id.cardAgendamento);
+        if(agendamento.getDataHora() != null){
+            holder.txtDiaHora.setText(
+                    agendamento.getDataHora()
+            );
+        }else{
+            holder.txtDiaHora.setText("Sem data");
+        }
 
         holder.itemView.setOnClickListener(v -> {
             listener.onItemClick(holder.getAdapterPosition());

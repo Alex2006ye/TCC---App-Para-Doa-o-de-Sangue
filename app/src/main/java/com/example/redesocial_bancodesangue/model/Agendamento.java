@@ -6,9 +6,10 @@ public class Agendamento {
     private Integer idAgendamento;
     private Integer idUsuarioDoador;
     private Integer idUsuarioHemocentro;
-    private LocalDateTime dataHora;
+    private String dataHora;
+    private Campanha campanha;
 
-    public Agendamento(Integer idAgendamento, Integer idUsuarioDoador, Integer idUsuarioHemocentro, LocalDateTime dataHora) {
+    public Agendamento(Integer idAgendamento, Integer idUsuarioDoador, Integer idUsuarioHemocentro, String dataHora) {
         this.idAgendamento = idAgendamento;
         this.idUsuarioDoador = idUsuarioDoador;
         this.idUsuarioHemocentro = idUsuarioHemocentro;
@@ -43,11 +44,16 @@ public class Agendamento {
         this.idUsuarioHemocentro = idUsuarioHemocentro;
     }
 
-    public LocalDateTime getDataHora() {
+    public String getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
+    public void setDataHora(String dataHora) {
         this.dataHora = dataHora;
     }
+
+    public Campanha getCampanha() {return campanha;}
+
+    public void setCampanha(Campanha campanha) {this.campanha = campanha;}
 }
+

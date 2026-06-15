@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,17 +107,32 @@ public class doadorAgendamentos extends Fragment implements RecyclerViewInterfac
 
         buscarAgendamentosDoUsuario();
 
-        return inflater.inflate(R.layout.fragment_doador_agendamentos, container, false);
+        return view;
     }
 
     private void buscarAgendamentosDoUsuario(){
+        Log.d("TESTE", "ID DOADOR = " + idDoador);
         api.listarAgendamentosValidosUsuarioDoador(idDoador).enqueue(new Callback<List<Agendamento>>() {
             @Override
             public void onResponse(Call<List<Agendamento>> call, Response<List<Agendamento>> response) {
+                Log.d("AGENDAMENTOS", response.body().size() + "");
+                for(Agendamento a : response.body()) {
+
+                    Log.d(
+                            "TESTE",
+                            "DATA = " + a.getDataHora()
+                    );
+                    Log.d("TESTE", "CAMPANHA = " + a.getCampanha());
+                }
                 if(response.isSuccessful() && response.body() != null){
+
                     lista.clear();
+
                     lista.addAll(response.body());
+
                     adapter.notifyDataSetChanged();
+
+                    Log.d("AGENDAMENTOS", "Quantidade: " + lista.size());
                 } else {
                     Toast.makeText(getActivity(), "A lista não pode ser carregada", Toast.LENGTH_SHORT).show();
                 }

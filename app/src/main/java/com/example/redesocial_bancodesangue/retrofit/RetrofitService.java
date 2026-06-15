@@ -13,7 +13,7 @@ public class RetrofitService {
     }
 
     private void iniciarRetrofit(){
-        retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.6:8080/").addConverterFactory(GsonConverterFactory.create(new Gson())).build();
+        retrofit = new Retrofit.Builder().baseUrl("https://api-rest-tcc-app-de-doa-o-de-sangue-production.up.railway.app/").addConverterFactory(GsonConverterFactory.create(new Gson())).build();
     }
 
     public Retrofit getRetrofit(){
