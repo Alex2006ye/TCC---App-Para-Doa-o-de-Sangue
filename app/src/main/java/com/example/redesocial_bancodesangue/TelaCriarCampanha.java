@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -27,6 +28,7 @@ public class TelaCriarCampanha extends AppCompatActivity {
     private EditText txtNomeCampanha, txtDataInicio, txtDataFim;
     private Button btnAvancarCampanha;
     private int campoAtual = 0;
+    private ImageButton btnVoltarTelaCriarCampanha;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,6 +46,16 @@ public class TelaCriarCampanha extends AppCompatActivity {
         txtDataFim = findViewById(R.id.edtDataFim);
         txtDataInicio = findViewById(R.id.edtDataInicio);
         btnAvancarCampanha = findViewById(R.id.btnAvancarCampanha);
+        btnVoltarTelaCriarCampanha = findViewById(R.id.btnVoltarTelaCriacaoCampanhas);
+
+        btnVoltarTelaCriarCampanha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), TelaInicialHemocentros.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Calendar calendar = Calendar.getInstance();
 
