@@ -1,6 +1,7 @@
 package com.example.redesocial_bancodesangue.retrofit;
 
 import com.example.redesocial_bancodesangue.dto.LoginDTO;
+import com.example.redesocial_bancodesangue.dto.UpdateTokenDTO;
 import com.example.redesocial_bancodesangue.dto.UsuarioDoadorCreateDTO;
 import com.example.redesocial_bancodesangue.dto.UsuarioHemocentroCreateDTO;
 import com.example.redesocial_bancodesangue.model.Usuario;
@@ -12,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface UsuarioApi {
@@ -29,4 +31,7 @@ public interface UsuarioApi {
 
     @GET("users/hemocentros")
     Call<List<Usuario>> listarHemocentros();
+
+    @PUT("users/atualizarToken")
+    Call<Void> atualizarTokenFcm(@Body UpdateTokenDTO dto);
 }
