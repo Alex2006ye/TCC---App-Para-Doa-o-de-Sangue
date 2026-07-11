@@ -114,11 +114,17 @@ public class MainActivity extends AppCompatActivity {
 
                             UpdateTokenDTO dto1 = new UpdateTokenDTO();
                             dto1.setIdUsuario(usuario.getId());
-                            dto1.setToken(token);
+                            dto1.setTokenFcm(token);
 
                             api.atualizarTokenFcm(dto1).enqueue(new Callback<Void>() {
                                 @Override
                                 public void onResponse(Call<Void> call, Response<Void> response) {
+                                    if(response.isSuccessful()){
+                                        Log.d("TOKEN", "Token atualizado com sucesso: " + dto1.getTokenFcm());
+                                        Log.d("TOKEN", "ID do Usuário: " + dto1.getIdUsuario());
+                                    }else{
+                                        Log.d("TOKEN", "Erro ao atualizar token");
+                                    }
 
                                     Toast.makeText(getApplicationContext(),
                                             "Login realizado com sucesso",
@@ -155,10 +161,11 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable throwable) {
+                        Log.e("RETROFIT", "Erro", throwable);
+
                         Toast.makeText(getApplicationContext(),
-                                "Login Deu Erro, Não se conectou ao banco de dados "
-                                        + throwable.getMessage(),
-                                Toast.LENGTH_SHORT).show();
+                                throwable.toString(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
             }

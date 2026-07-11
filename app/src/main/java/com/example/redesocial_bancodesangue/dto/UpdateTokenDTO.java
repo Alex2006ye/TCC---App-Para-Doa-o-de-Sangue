@@ -2,15 +2,15 @@ package com.example.redesocial_bancodesangue.dto;
 
 public class UpdateTokenDTO {
     private Integer idUsuario;
-    private String token;
+    private String tokenFcm;
 
     public UpdateTokenDTO(){
 
     }
 
-    public UpdateTokenDTO(Integer idUsuario, String token) {
+    public UpdateTokenDTO(Integer idUsuario, String tokenFcm) {
         this.idUsuario = idUsuario;
-        this.token = token;
+        this.tokenFcm = tokenFcm;
     }
 
     public Integer getIdUsuario() {
@@ -21,11 +21,11 @@ public class UpdateTokenDTO {
         this.idUsuario = idUsuario;
     }
 
-    public String getToken() {
-        return token;
+    public String getTokenFcm() {
+        return tokenFcm;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setTokenFcm(String tokenFcm) {
+        this.tokenFcm = tokenFcm;
     }
 }
