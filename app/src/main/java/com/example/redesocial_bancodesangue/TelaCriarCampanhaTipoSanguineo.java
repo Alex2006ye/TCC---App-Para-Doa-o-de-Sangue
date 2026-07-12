@@ -3,6 +3,7 @@ package com.example.redesocial_bancodesangue;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -104,13 +105,25 @@ public class TelaCriarCampanhaTipoSanguineo extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } else{
-                            Toast.makeText(getApplicationContext(), "Erro na criação da campanha", Toast.LENGTH_SHORT).show();
+                            try {
+                                if (response.errorBody() != null) {
+                                    Log.e("ERRO", response.errorBody().string());
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable throwable) {
                         Toast.makeText(getApplicationContext(), "Erro no salvamento da campanha " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        Log.e("RETROFIT", "Erro", throwable);
+
+                        Toast.makeText(getApplicationContext(),
+                                throwable.toString(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
             }
