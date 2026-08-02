@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -28,6 +29,7 @@ public class TelaAlterarCampanha extends AppCompatActivity {
     private EditText edtNomeCampanhaAlterar, edtDataInicioAlterar, edtDataFimAlterar;
     private Button btnAlterarCampanha;
     private int campoAtual = 0;
+    private ImageButton btnVoltar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -45,6 +47,16 @@ public class TelaAlterarCampanha extends AppCompatActivity {
         edtDataInicioAlterar = findViewById(R.id.edtDataInicioAlterar);
         edtNomeCampanhaAlterar = findViewById(R.id.edtNomeCampanhaAlterar);
         btnAlterarCampanha = findViewById(R.id.btnAlterarCampanha);
+        btnVoltar = findViewById(R.id.btnVoltarTelaAlterarCampanha);
+
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), TelaInicialHemocentros.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         edtDataFimAlterar.setText(getIntent().getStringExtra("dataFim"));
         edtDataInicioAlterar.setText(getIntent().getStringExtra("dataInicio"));

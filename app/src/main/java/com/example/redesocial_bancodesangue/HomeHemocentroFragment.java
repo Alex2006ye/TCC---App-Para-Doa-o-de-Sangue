@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +109,13 @@ public class HomeHemocentroFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable throwable) {
-                Toast.makeText(getContext(), "Erro em trazer o dado atual de campanhas ativas", Toast.LENGTH_SHORT).show();
+                Log.e("API", "Erro", throwable);
+
+                if (isAdded()) {
+                    Toast.makeText(requireContext(),
+                            "Erro em trazer o dado atual de campanhas ativas",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

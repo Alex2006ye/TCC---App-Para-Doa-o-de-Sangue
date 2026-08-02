@@ -17,8 +17,11 @@ public class Usuario {
     private TipoSanguineo tipoSanguineo;
     private Integer numero;
     private String bairro;
+    private String token;
 
-    public Usuario(Integer id, TipoUsuario tipoUsuario, String nome, String email, String senha, String cpf, String cnpj, String dataNasc, Double peso, String rua, String cep, Integer numero, String bairro, TipoSanguineo tipoSanguineo) {
+    public Usuario(Integer id, TipoUsuario tipoUsuario, String nome, String email, String senha, String cpf, String cnpj, String dataNasc, Double peso, String rua, String cep, Integer numero, String bairro,
+                   TipoSanguineo tipoSanguine,
+                   String token) {
         this.id = id;
         this.tipoUsuario = tipoUsuario;
         this.nome = nome;
@@ -33,6 +36,7 @@ public class Usuario {
         this.numero = numero;
         this.bairro = bairro;
         this.tipoSanguineo = tipoSanguineo;
+        this.token = token;
     }
     public Usuario(){
 
@@ -148,5 +152,13 @@ public class Usuario {
 
     public void setTipoSanguineo(TipoSanguineo tipoSanguineo) {
         this.tipoSanguineo = tipoSanguineo;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

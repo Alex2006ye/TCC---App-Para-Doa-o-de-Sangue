@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "122277400280",
+    "project_id": "bloodlink-tcc",
+    "storage_bucket": "bloodlink-tcc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122277400280:android:210b5e58e99bbafb12d1ad",
+        "android_client_info": {
+          "package_name": "com.example.redesocial_bancodesangue"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeIuu0y4tltg1F-IYjt49V9S1DBnmQVNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
