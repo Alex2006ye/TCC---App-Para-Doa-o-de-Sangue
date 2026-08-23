@@ -18,6 +18,8 @@ public class Usuario {
     private Integer numero;
     private String bairro;
     private String token;
+    private Double latitude;
+    private Double longitude;
 
     public Usuario(Integer id, TipoUsuario tipoUsuario, String nome, String email, String senha, String cpf, String cnpj, String dataNasc, Double peso, String rua, String cep, Integer numero, String bairro,
                    TipoSanguineo tipoSanguine,
@@ -160,5 +162,21 @@ public class Usuario {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }
