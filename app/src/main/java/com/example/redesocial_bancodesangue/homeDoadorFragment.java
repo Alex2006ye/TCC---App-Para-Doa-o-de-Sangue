@@ -1,8 +1,11 @@
 package com.example.redesocial_bancodesangue;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,7 +14,9 @@ import android.view.ViewGroup;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.redesocial_bancodesangue.dto.UpdateLocationDTO;
 import com.example.redesocial_bancodesangue.model.Usuario;
 import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
 import com.example.redesocial_bancodesangue.retrofit.UsuarioApi;
@@ -22,6 +27,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
 import java.util.List;
@@ -46,6 +53,10 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
     private String mParam1;
     private String mParam2;
     private Integer idDoador;
+
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int LOCATION_PERMISSION_REQUEST = 100;
+    private UsuarioApi api;
 
     public homeDoadorFragment() {
         // Required empty public constructor
@@ -85,6 +96,12 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
                 container,
                 false);
 
+        fusedLocationProviderClient =
+                LocationServices.getFusedLocationProviderClient(requireActivity());
+
+        RetrofitService retrofitService = new RetrofitService();
+        api = retrofitService.getRetrofit().create(UsuarioApi.class);
+
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager()
                         .findFragmentById(R.id.map);
@@ -100,14 +117,24 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         myMap = googleMap;
 
+        solicitarLocalizacao();
+
         carregarHemocentros();
+
+        myMap.setOnMarkerClickListener(marker ->{
+            Object tag = marker.getTag();
+
+            if(tag instanceof Integer){
+                Integer idHemocentro = (Integer) tag;
+                abrirCampanhas(idHemocentro);
+                return true;
+            }
+
+            return false;
+        });
     }
 
     private void carregarHemocentros() {
-        RetrofitService retrofitService = new RetrofitService();
-
-        UsuarioApi api = retrofitService.getRetrofit().create(UsuarioApi.class);
-
         api.listarHemocentros().enqueue(new Callback<List<Usuario>>() {
 
                     @Override
@@ -157,11 +184,6 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
 
                 myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posicao, 12f));
             }
-            myMap.setOnMarkerClickListener(marker -> {
-                Integer idHemocentro = (Integer) marker.getTag();
-                abrirCampanhas(idHemocentro);
-                return true;
-            });
 
         } catch (IOException e) {
             Log.e("MAPA", "Erro ao converter endereço", e);
@@ -172,5 +194,64 @@ public class homeDoadorFragment extends Fragment implements OnMapReadyCallback {
         ListaCampanhasHemocentroDoadorFragment fragment = ListaCampanhasHemocentroDoadorFragment.newInstance(idHemocentro, idDoador);
 
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameTelaInicial, fragment).addToBackStack(null).commit();
+    }
+
+    private void solicitarLocalizacao(){
+        if(ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST);
+
+            return;
+        }
+
+        obterLocalizacao();
+    }
+
+    private void obterLocalizacao(){
+        if(ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED){
+            return;
+        }
+
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+            if(location != null){
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
+                Log.d("LOCALIZAÇÃO", "LATITUDE: " + latitude + " LONGITUDE: " + longitude);
+
+                UpdateLocationDTO updateLocationDTO = new UpdateLocationDTO();
+                updateLocationDTO.setIdUsuario(idDoador);
+                updateLocationDTO.setLatitude(latitude);
+                updateLocationDTO.setLongitude(longitude);
+
+                api.atualizarLocalizacao(updateLocationDTO).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.isSuccessful())
+                            Toast.makeText(getActivity().getApplicationContext(), "Localização do usuário salvo com sucesso", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable throwable) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Localização do usuário não foi salva", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                posicionarMapa(latitude, longitude);
+            }
+        });
+    }
+
+    private void posicionarMapa(double latitude, double longitude) {
+        LatLng localizacaoUsuario = new LatLng(latitude, longitude);
+
+        myMap.addMarker(new MarkerOptions().position(localizacaoUsuario).title("Você está aqui"));
+
+        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localizacaoUsuario, 13f));
     }
 }

@@ -1,13 +1,13 @@
 package com.example.redesocial_bancodesangue.retrofit;
 
 import com.example.redesocial_bancodesangue.dto.LoginDTO;
+import com.example.redesocial_bancodesangue.dto.UpdateLocationDTO;
 import com.example.redesocial_bancodesangue.dto.UpdateTokenDTO;
 import com.example.redesocial_bancodesangue.dto.UsuarioDoadorCreateDTO;
 import com.example.redesocial_bancodesangue.dto.UsuarioHemocentroCreateDTO;
 import com.example.redesocial_bancodesangue.model.Usuario;
 
 import java.util.List;
-import java.util.Optional;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,7 +24,7 @@ public interface UsuarioApi {
     Call<Void> salvarUsuarioDoador(@Body UsuarioDoadorCreateDTO dto);
 
     @POST("users/salvarUsuarioHemocentro")
-    Call<Void> salvarUsuarioHemocentro(@Body UsuarioHemocentroCreateDTO dto);
+    Call<Usuario> salvarUsuarioHemocentro(@Body UsuarioHemocentroCreateDTO dto);
 
     @GET("users/buscarUsuarioPorId/{id}")
     Call<Usuario> buscarUsuarioPorId(@Path("id") Integer id);
@@ -34,4 +34,7 @@ public interface UsuarioApi {
 
     @PUT("users/atualizarToken")
     Call<Void> atualizarTokenFcm(@Body UpdateTokenDTO dto);
+
+    @PUT("users/atualizarLocalizacao")
+    Call<Void> atualizarLocalizacao(@Body UpdateLocationDTO dto);
 }

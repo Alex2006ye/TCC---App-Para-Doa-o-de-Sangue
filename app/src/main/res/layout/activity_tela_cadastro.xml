@@ -10,84 +10,108 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="199dp"
-        android:layout_height="216dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="130dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034"
         app:srcCompat="@drawable/blood_donation_3347773" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Qual Tipo De Usuário É Você?"
+        android:textColor="#00695C"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
     <RadioGroup
         android:id="@+id/grupoTipoUsuario"
-        android:layout_width="347dp"
-        android:layout_height="111dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.375">
+        app:layout_constraintTop_toBottomOf="@id/textView2">
 
         <RadioButton
             android:id="@+id/radioUsuarioDoador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Usuário Doador" />
+            android:background="@drawable/bg_radio_tipo_sanguineo"
+            android:button="@null"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingEnd="20dp"
+            android:text="Usuário Doador"
+            android:textColor="@color/text_radio_tipo_sanguineo"
+            android:textSize="17sp" />
 
         <RadioButton
             android:id="@+id/radioUsuarioHemocentro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Usuário Hemocentro" />
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_radio_tipo_sanguineo"
+            android:button="@null"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingEnd="20dp"
+            android:text="Usuário Hemocentro"
+            android:textColor="@color/text_radio_tipo_sanguineo"
+            android:textSize="17sp" />
+
     </RadioGroup>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="350dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:text="Qual Tipo De Usuário É Você?"
-        android:textColor="#00695C"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/grupoTipoUsuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.935" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAvancarTipoUsuario"
-        android:layout_width="238dp"
-        android:layout_height="76dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:backgroundTint="#558B2F"
         android:text="Avançar"
-        android:textSize="24sp"
-        app:cornerRadius="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:cornerRadius="16dp"
+        app:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grupoTipoUsuario"
-        app:layout_constraintVertical_bias="0.266" />
+        app:layout_constraintTop_toBottomOf="@id/grupoTipoUsuario" />
 
     <TextView
         android:id="@+id/txtLinkLogin"
-        android:layout_width="278dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
+        android:padding="4dp"
         android:text="Já tem conta? Faça o Login então"
         android:textColor="#1565C0"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
