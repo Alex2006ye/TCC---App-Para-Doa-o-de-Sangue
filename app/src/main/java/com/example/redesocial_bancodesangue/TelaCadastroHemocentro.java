@@ -2,6 +2,8 @@ package com.example.redesocial_bancodesangue;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +19,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.redesocial_bancodesangue.dto.UpdateLocationDTO;
 import com.example.redesocial_bancodesangue.dto.UsuarioHemocentroCreateDTO;
 import com.example.redesocial_bancodesangue.model.Endereco;
 import com.example.redesocial_bancodesangue.model.TipoUsuario;
@@ -25,6 +28,9 @@ import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
 import com.example.redesocial_bancodesangue.retrofit.UsuarioApi;
 import com.example.redesocial_bancodesangue.retrofit.ViaCepApi;
 import com.example.redesocial_bancodesangue.retrofit.ViaCepRetrofitService;
+
+import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +44,9 @@ public class TelaCadastroHemocentro extends AppCompatActivity {
 
     // Guarda o endereço retornado pelo ViaCEP
     private Endereco enderecoAtual = null;
+
+    RetrofitService retrofit = new RetrofitService();
+    UsuarioApi api = retrofit.getRetrofit().create(UsuarioApi.class);
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -58,10 +67,6 @@ public class TelaCadastroHemocentro extends AppCompatActivity {
         edtSenhaHemocentro          = findViewById(R.id.edtSenhaHemocentro);
         edtCEPHemocentro            = findViewById(R.id.edtCEPHemocentro);
         edtNumeroHemocentro         = findViewById(R.id.edtNumeroHemocentro); // campo de número
-
-        // Clientes Retrofit
-        RetrofitService retrofit = new RetrofitService();
-        UsuarioApi api = retrofit.getRetrofit().create(UsuarioApi.class);
 
         ViaCepRetrofitService viaCepService = new ViaCepRetrofitService();
         ViaCepApi viaCepApi = viaCepService.getRetrofit().create(ViaCepApi.class);
@@ -127,21 +132,21 @@ public class TelaCadastroHemocentro extends AppCompatActivity {
                         // adicione os campos de endereço no DTO se necessário
                 );
 
-                api.salvarUsuarioHemocentro(dto).enqueue(new Callback<Void>() {
+                api.salvarUsuarioHemocentro(dto).enqueue(new Callback<Usuario>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         if (response.code() == 409) {
                             Toast.makeText(getApplicationContext(), "Email ou CNPJ já cadastrado", Toast.LENGTH_SHORT).show();
+                            return;
                         }
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
+                            obterLocalizacaoHemocentro(response.body());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable throwable) {
+                    public void onFailure(Call<Usuario> call, Throwable throwable) {
                         Log.e("RETROFIT_ERROR", "Mensagem: " + throwable.getMessage());
                         throwable.printStackTrace();
                         Toast.makeText(getApplicationContext(), "Erro: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
@@ -149,6 +154,45 @@ public class TelaCadastroHemocentro extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void obterLocalizacaoHemocentro(Usuario usuario){
+        try {
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
+            String enderecoCompleto = usuario.getRua() + ", "
+                    + usuario.getNumero() + ", "
+                    + usuario.getBairro() + ", "
+                    + usuario.getCep();
+
+            List<Address> resultado = geocoder.getFromLocationName(enderecoCompleto, 1);
+
+            if (resultado != null && !resultado.isEmpty()) {
+                Address endereco = resultado.get(0);
+
+                UpdateLocationDTO dto1 = new UpdateLocationDTO();
+                dto1.setLongitude(endereco.getLongitude());
+                dto1.setLatitude(endereco.getLatitude());
+                dto1.setIdUsuario(usuario.getId());
+
+                api.atualizarLocalizacao(dto1).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.isSuccessful()) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable throwable) {
+                        Toast.makeText(getApplicationContext(), "Localização do usuário não foi salva", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void buscarCep(String cep, ViaCepApi viaCepApi) {
