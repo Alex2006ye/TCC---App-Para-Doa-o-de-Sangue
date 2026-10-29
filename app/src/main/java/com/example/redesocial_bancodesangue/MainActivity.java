@@ -134,12 +134,12 @@ public class MainActivity extends AppCompatActivity {
                                         Intent intent = new Intent(getApplicationContext(), TelaInicial.class);
                                         intent.putExtra("idUsuario", usuario.getId());
                                         startActivity(intent);
-                                        finish();
+                                        //finish();
                                     } else {
                                         Intent intent = new Intent(getApplicationContext(), TelaInicialHemocentros.class);
                                         intent.putExtra("idUsuario", usuario.getId());
                                         startActivity(intent);
-                                        finish();
+                                        //finish();
                                     }
                                 }
 

@@ -98,6 +98,12 @@ public class TelaCadastroDoadores extends AppCompatActivity {
                     return;
                 }
 
+                // verifica se o email é válido (contém @)
+                if (!email.contains("@")) {
+                    Toast.makeText(getApplicationContext(), "Digite um email válido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (cpf.length() < 11 || cpf.length() > 11) {
                     Toast.makeText(getApplicationContext(), "O CPF foi digitado incorretamente", Toast.LENGTH_SHORT).show();
                     return;

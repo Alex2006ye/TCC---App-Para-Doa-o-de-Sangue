@@ -4,17 +4,17 @@
     android:id="@+id/cardAgendamento"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="6dp"
-    app:cardBackgroundColor="#FFFFFFFF"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="3dp">
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <View
@@ -29,23 +29,33 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- NOME DO HEMOCENTRO -->
             <TextView
                 android:id="@+id/txtNomeHemocentroAgendadoRecycler"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="Nome do Hemocentro Exemplo"
                 android:textColor="#212121"
-                android:textSize="18sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
+            <!-- DIA E HORA (chip) -->
             <TextView
                 android:id="@+id/txtDiaHoraRecycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_chip_data_hora"
+                android:paddingStart="12dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="5dp"
                 android:text="Dia e Hora de Exemplo"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:textColor="#2E7D32"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

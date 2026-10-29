@@ -4,17 +4,17 @@
     android:id="@+id/cardCampanha"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="6dp"
-    app:cardBackgroundColor="#FFFFFFFF"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="3dp">
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <View
@@ -28,56 +28,71 @@
             android:layout_weight="1"
             android:padding="16dp">
 
+            <!-- NOME -->
             <TextView
                 android:id="@+id/txtNomeCampanhaRecycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="Nome Campanha Exemplo"
                 android:textColor="#212121"
-                android:textSize="18sp"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/txtIdCampanhaRecycler"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- ID (badge circular) -->
             <TextView
                 android:id="@+id/txtIdCampanhaRecycler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_badge_number"
+                android:gravity="center"
                 android:text="1"
-                android:textColor="#9E9E9E"
+                android:textColor="#B71C1C"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/txtNomeCampanhaRecycler" />
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- TIPO SANGUÍNEO (chip) -->
             <TextView
                 android:id="@+id/txtTipoSanguineoRecycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_chip_tipo_sanguineo"
+                android:paddingStart="12dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="5dp"
                 android:text="Tipo Sanguíneo Exemplo"
-                android:textColor="#757575"
-                android:textSize="14sp"
+                android:textColor="#B71C1C"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtNomeCampanhaRecycler" />
 
+            <!-- STATUS -->
             <TextView
                 android:id="@+id/txtStatusRecycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/bg_status_campanha"
-                android:paddingStart="10dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="4dp"
+                android:paddingStart="12dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="5dp"
                 android:text="Inativa"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTipoSanguineoRecycler" />
+                app:layout_constraintBottom_toBottomOf="@id/txtTipoSanguineoRecycler"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txtTipoSanguineoRecycler" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
