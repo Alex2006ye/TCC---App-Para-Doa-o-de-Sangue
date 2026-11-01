@@ -77,7 +77,11 @@ public class AgendamentoAdapter extends RecyclerView.Adapter<AgendamentoAdapter.
         }
 
         holder.itemView.setOnClickListener(v -> {
-            listener.onItemClick(holder.getAdapterPosition());
+            int posicaoAtual = holder.getAdapterPosition();
+
+            if(posicaoAtual != RecyclerView.NO_POSITION){
+                listener.onItemClick(position);
+            }
         });
     }
 
