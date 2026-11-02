@@ -91,6 +91,12 @@ public class ListaCampanhasHemocentroDoadorFragment extends Fragment implements 
 
         recyclerCampanhas = view.findViewById(R.id.recyclerCampanhas);
 
+        // Doador não cria campanhas, então escondemos o botão
+        View btnCriar = view.findViewById(R.id.btnCriarCampanha);
+        if (btnCriar != null) {
+            btnCriar.setVisibility(View.GONE);
+        }
+
         recyclerCampanhas.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         adapter = new CampanhasAdapter(campanhas, this);
