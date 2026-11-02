@@ -81,7 +81,11 @@ public class CampanhasAdapter extends RecyclerView.Adapter<CampanhasAdapter.View
         }
 
         holder.itemView.setOnClickListener(v -> {
-            listener.onItemClick(position);
+            int posicaoAtual = holder.getAdapterPosition();
+
+            if(posicaoAtual != RecyclerView.NO_POSITION){
+                listener.onItemClick(position);
+            }
         });
     }
 
