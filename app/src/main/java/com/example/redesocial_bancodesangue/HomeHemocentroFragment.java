@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import com.example.redesocial_bancodesangue.adapter.RecyclerViewInterface;
 import com.example.redesocial_bancodesangue.model.Agendamento;
@@ -86,6 +87,13 @@ public class HomeHemocentroFragment extends Fragment {
         txtNumeroCampanhasAtivas = view.findViewById(R.id.numeroCard);
         txtNumeroCampanhasFinalizadas = view.findViewById(R.id.numeroSegundoCard);
         txtNumeroAgendamentosAtivos = view.findViewById(R.id.numeroTerceiroCard);
+
+        final int idHemo = idHemocentro;
+        view.findViewById(R.id.cardParticipantes).setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), TelaParticipantesCampanhas.class);
+            intent.putExtra("idHemocentro", idHemo);
+            startActivity(intent);
+        });
 
         analisarCampanhasAtivas(idHemocentro);
         analisarCampanhasFinalizadas(idHemocentro);

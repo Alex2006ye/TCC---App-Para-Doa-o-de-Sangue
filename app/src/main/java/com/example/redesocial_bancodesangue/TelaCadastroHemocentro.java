@@ -103,6 +103,12 @@ public class TelaCadastroHemocentro extends AppCompatActivity {
                     return;
                 }
 
+                // verifica se o email é válido (contém @)
+                if (!email.contains("@")) {
+                    Toast.makeText(getApplicationContext(), "Digite um email válido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (cnpj.length() != 14) {
                     Toast.makeText(getApplicationContext(), "O CNPJ foi digitado de forma incorreta", Toast.LENGTH_SHORT).show();
                     return;

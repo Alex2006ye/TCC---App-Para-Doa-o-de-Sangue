@@ -2,6 +2,7 @@ package com.example.redesocial_bancodesangue.retrofit;
 
 import com.example.redesocial_bancodesangue.dto.AgendamentoCreateDTO;
 import com.example.redesocial_bancodesangue.model.Agendamento;
+import com.example.redesocial_bancodesangue.model.ParticipanteCampanha;
 
 import java.util.List;
 
@@ -27,4 +28,7 @@ public interface AgendamentoApi {
 
     @GET("agendamento/participantesCampanhas/{idHemocentro}")
     Call<Integer> contarParticipantesCampanhas(@Path("idHemocentro") Integer idHemocentro);
+
+    @GET("agendamento/participantes/{idHemocentro}")
+    Call<List<ParticipanteCampanha>> buscarParticipantes(@Path("idHemocentro") Integer idHemocentro);
 }

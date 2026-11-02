@@ -1,130 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6FFFFFF"
-    tools:context=".HomeHemocentroFragment"
-    android:orientation="vertical">
+    android:background="@drawable/bg_gradient_red"
+    android:fillViewport="true"
+    tools:context=".HomeHemocentroFragment">
 
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="12dp"
-        app:cardElevation="6dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="8dp"
-        android:background="#9E9D24">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="32dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="24dp">
 
-        <LinearLayout
+        <!-- CABEÇALHO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Painel do Hemocentro"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="24dp"
+            android:text="Acompanhe suas campanhas e agendamentos"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+        <!-- CARD 1: CAMPANHAS ATIVAS -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D1CF50"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
 
-            <!-- TÍTULO -->
-            <TextView
-                android:id="@+id/tituloCard"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Campanhas Ativas"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20dp">
 
-            <!-- VALOR DINÂMICO -->
-            <TextView
-                android:id="@+id/numeroCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="0"
-                android:textColor="#D32F2F"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+                <!-- faixa de destaque verde -->
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="56dp"
+                    android:background="#2E7D32" />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/tituloCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Campanhas Ativas"
+                        android:textColor="#212121"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="12dp"
-        app:cardElevation="6dp"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="8dp"
-        android:background="#9E9D24"
-        >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Em andamento agora"
+                        android:textColor="#757575"
+                        android:textSize="12sp" />
+                </LinearLayout>
 
-        <LinearLayout
+                <TextView
+                    android:id="@+id/numeroCard"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/bg_badge_number"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#B71C1C"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD 2: CAMPANHAS FINALIZADAS -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D1CF50"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
 
-            <TextView
-                android:id="@+id/tituloSegundoCard"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Campanhas Finalizadas"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:textStyle="bold">
-            </TextView>
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20dp">
 
-            <TextView
-                android:id="@+id/numeroSegundoCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#D32F2F"
-                android:textSize="28sp"
-                android:textStyle="bold">
-            </TextView>
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="56dp"
+                    android:background="#9E9E9E" />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/tituloSegundoCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Campanhas Finalizadas"
+                        android:textColor="#212121"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="12dp"
-        app:cardElevation="6dp"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="8dp"
-        android:background="#9E9D24"
-        >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Já encerradas"
+                        android:textColor="#757575"
+                        android:textSize="12sp" />
+                </LinearLayout>
 
-        <LinearLayout
+                <TextView
+                    android:id="@+id/numeroSegundoCard"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/bg_badge_number"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#B71C1C"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD 3: AGENDAMENTOS ATIVOS -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardParticipantes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D1CF50"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
 
-            <TextView
-                android:id="@+id/tituloTerceiroCard"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Agendamentos Ativos"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:textStyle="bold">
-            </TextView>
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20dp">
 
-            <TextView
-                android:id="@+id/numeroTerceiroCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#D32F2F"
-                android:textSize="28sp"
-                android:textStyle="bold">
-            </TextView>
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="56dp"
+                    android:background="#B71C1C" />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+                    <TextView
+                        android:id="@+id/tituloTerceiroCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Agendamentos Ativos"
+                        android:textColor="#212121"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Doadores aguardados"
+                        android:textColor="#757575"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/numeroTerceiroCard"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/bg_badge_number"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#B71C1C"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
