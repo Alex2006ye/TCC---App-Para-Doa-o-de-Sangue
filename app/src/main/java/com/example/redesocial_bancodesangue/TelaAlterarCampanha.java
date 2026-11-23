@@ -88,13 +88,15 @@ public class TelaAlterarCampanha extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 campoAtual = 1;
-                new DatePickerDialog(
+                DatePickerDialog datePicker = new DatePickerDialog(
                         TelaAlterarCampanha.this,
                         dateSetListener,
                         calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)
-                ).show();
+                );
+                  datePicker.getDatePicker().setMinDate(System.currentTimeMillis());
+                  datePicker.show();
             }
         });
 
