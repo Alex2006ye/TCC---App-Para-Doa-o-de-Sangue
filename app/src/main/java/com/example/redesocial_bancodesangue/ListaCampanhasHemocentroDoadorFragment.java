@@ -22,9 +22,11 @@ import com.example.redesocial_bancodesangue.adapter.CampanhasAdapter;
 import com.example.redesocial_bancodesangue.adapter.RecyclerViewInterface;
 import com.example.redesocial_bancodesangue.dto.AgendamentoCreateDTO;
 import com.example.redesocial_bancodesangue.model.Campanha;
+import com.example.redesocial_bancodesangue.model.Usuario;
 import com.example.redesocial_bancodesangue.retrofit.AgendamentoApi;
 import com.example.redesocial_bancodesangue.retrofit.CampanhaApi;
 import com.example.redesocial_bancodesangue.retrofit.RetrofitService;
+import com.example.redesocial_bancodesangue.retrofit.UsuarioApi;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -145,17 +147,50 @@ public class ListaCampanhasHemocentroDoadorFragment extends Fragment implements 
             return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        // Verificação de Tipo Sanguíneo Compatível com a Campanha
 
-        builder.setTitle(campanha.getNomeCampanha());
+        RetrofitService retrofit = new RetrofitService();
 
-        builder.setMessage("Deseja participar desta campanha?");
+        UsuarioApi api = retrofit.getRetrofit().create(UsuarioApi.class);
 
-        builder.setPositiveButton("Sim", (dialog, which) -> abrirSeletorData(campanha));
+        api.buscarUsuarioPorId(idDoador).enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if(!response.isSuccessful() || response.body() == null){
+                    Toast.makeText(getContext(),
+                            "Não foi possível buscar os dados do doador.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-        builder.setNegativeButton("Não", null);
+                String tipoDoador = String.valueOf(response.body().getTipoSanguineo());
+                String tipoCampanha = String.valueOf(campanha.getTipoSanguineoVisado());
 
-        builder.show();
+                if (!tipoDoador.equals(tipoCampanha)) {
+                    Toast.makeText(getContext(),
+                            "Seu tipo sanguíneo não corresponde ao solicitado nesta campanha.",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+
+                builder.setTitle(campanha.getNomeCampanha());
+
+                builder.setMessage("Deseja participar desta campanha?");
+
+                builder.setPositiveButton("Sim", (dialog, which) -> abrirSeletorData(campanha));
+
+                builder.setNegativeButton("Não", null);
+
+                builder.show();
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable throwable) {
+                Toast.makeText(getContext(), "Erro ao buscar tipo sanguíneo do doador", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
