@@ -249,11 +249,53 @@ public class ListaCampanhasHemocentroDoadorFragment extends Fragment implements 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void abrirSeletorHora(Campanha campanha, LocalDate dataSelecionada){
+    private void abrirSeletorHora(Campanha campanha, LocalDate dataSelecionada) {
+
         TimePickerDialog timePicker = new TimePickerDialog(requireContext(),
                 (view, hourOfDay, minute) -> {
-                LocalDateTime dataHoraAgendamento = LocalDateTime.of(dataSelecionada, LocalTime.of(hourOfDay, minute));
-                    criarAgendamento(campanha, dataHoraAgendamento);}, 8, 0, true);
+
+                    LocalDateTime dataHoraAgendamento =
+                            LocalDateTime.of(dataSelecionada, LocalTime.of(hourOfDay, minute));
+
+                    RetrofitService retrofitService = new RetrofitService();
+                    AgendamentoApi api = retrofitService.getRetrofit()
+                            .create(AgendamentoApi.class);
+
+                    api.verificarHorario(
+                            campanha.getIdCampanha(),
+                            dataHoraAgendamento.toString()
+                    ).enqueue(new Callback<Boolean>() {
+
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+
+                                if (response.body()) {
+                                    Toast.makeText(getContext(),
+                                            "Este horário já está ocupado. Escolha outro.",
+                                            Toast.LENGTH_LONG).show();
+                                } else {
+                                    criarAgendamento(campanha, dataHoraAgendamento);
+                                }
+
+                            } else {
+                                Toast.makeText(getContext(),
+                                        "Erro ao verificar horário. Código: " + response.code(),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+                            Log.e("AGENDAMENTO", "Erro ao verificar horário", t);
+
+                            Toast.makeText(getContext(),
+                                    "Erro de conexão ao verificar horário.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }, 8, 0, true);
 
         timePicker.show();
     }

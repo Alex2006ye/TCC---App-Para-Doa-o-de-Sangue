@@ -12,6 +12,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface AgendamentoApi {
     @GET("agendamento/agendamentosValidosDoador/{idDoador}")
@@ -31,4 +32,7 @@ public interface AgendamentoApi {
 
     @GET("agendamento/participantes/{idHemocentro}")
     Call<List<ParticipanteCampanha>> buscarParticipantes(@Path("idHemocentro") Integer idHemocentro);
+
+    @GET("agendamento/verificarHorario/{idCampanha}")
+    Call<Boolean> verificarHorario(@Path("idCampanha") Integer idCampanha, @Query("dataHora") String dataHora);
 }
